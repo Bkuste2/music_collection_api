@@ -37,11 +37,6 @@ class UsersController < ApplicationController
       else
         render json: ErrorSerializer.serialize(@user.errors), status: :unprocessable_entity
       end
-
-    rescue ArgumentError => e
-      render json: { error: "Invalid argument: #{e.message}" }, status: :bad_request
-    rescue StandardError => e
-      render json: { error: "An unexpected error occurred: #{e.message}" }, status: :internal_server_error
     end
   end
 
@@ -72,14 +67,10 @@ class UsersController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { error: 'User not found' }, status: :not_found
   end
 
-  # Only allow a list of trusted parameters through.
   def user_params
     params.require(:user).permit(:full_name, :username, :password, :role)
   end
