@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   include ErrorSerializer
   before_action :set_user, only: %i[show update destroy]
+  skip_before_action :authenticate_user, only: %i[create]
 
   # GET /users
   def index
