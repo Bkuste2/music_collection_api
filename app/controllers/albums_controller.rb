@@ -37,7 +37,13 @@ class AlbumsController < ApplicationController
 
   # DELETE /albums/1
   def destroy
+    unless @current_user.role == "admin"
+      render json: { code: "unauthorized", message: "You are not authorized to delete this album." }, status: :unauthorized
+      return
+    end
+
     @album.destroy
+    render json: @current_user
   end
 
   private
