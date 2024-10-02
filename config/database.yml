@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: music_collection_api_production
-  username: music_collection_api
-  password: <%= ENV["MUSIC_COLLECTION_API_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
+  database: railwayapp_production
+  username: railwayapp
+  password: <%= ENV["RAILWAYAPP_DATABASE_PASSWORD"] %>
