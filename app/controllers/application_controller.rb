@@ -9,9 +9,8 @@ class ApplicationController < ActionController::API
 
   private
   def authenticate_user
-    secret = "H2k@3$2%"
     authenticate_or_request_with_http_token do |token, options|
-      decoded_token = JWT.decode(token, secret, true, { algorithm: 'HS256' })
+      decoded_token = JWT.decode(token, ENV['JWT_SECRET'], true, { algorithm: 'HS256' })
       @current_user = User.find(decoded_token.first['user_id'])
     end
     rescue JWT::DecodeError
