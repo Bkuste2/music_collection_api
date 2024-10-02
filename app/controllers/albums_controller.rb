@@ -3,8 +3,6 @@ class AlbumsController < ApplicationController
 
   # GET /albums
   def index
-    p :user
-
     @albums = Album.all
 
     render json: @albums
@@ -43,16 +41,13 @@ class AlbumsController < ApplicationController
     end
 
     @album.destroy
-    render json: @current_user
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_album
       @album = Album.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def album_params
       params.require(:album).permit(:name, :year, :artist_id, :user_id)
     end

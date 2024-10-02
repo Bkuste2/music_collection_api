@@ -46,7 +46,6 @@ class UsersController < ApplicationController
     @new_pass = BCrypt::Password.create(params[:password]) if params[:password].present?
     update_params = user_params
 
-    # Evita atualizar o username se for o mesmo
     if params[:username].present? && params[:username] == @user.username
       update_params = update_params.except(:username)
     end
