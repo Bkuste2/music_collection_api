@@ -53,3 +53,6 @@ group :development do
 end
 
 gem 'jwt'
+
+# Gemfile
+gem 'dotenv-rails', groups: [:development, :test]
